@@ -68,8 +68,8 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Bj-FH-8tV">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="392"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" id="SLf-Az-0Ya">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search for a nearby business" id="SLf-Az-0Ya">
+                                    <rect key="frame" x="0.0" y="64" width="383" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                     <connections>
@@ -78,7 +78,7 @@
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="6gb-Wl-bMh" detailTextLabel="3ey-re-GoS" style="IBUITableViewCellStyleValue1" id="W4S-PC-GP6">
-                                        <rect key="frame" x="0.0" y="72" width="383" height="44"/>
+                                        <rect key="frame" x="0.0" y="136" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W4S-PC-GP6" id="QXS-5k-Nol">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
@@ -170,12 +170,12 @@
                     <navigationItem key="navigationItem" title="Biznizez" id="T5W-KZ-4Jm">
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="F57-eK-s93">
                             <connections>
-                                <segue destination="iQC-8t-wHb" kind="show" id="0Jb-0w-b6R"/>
+                                <segue destination="iQC-8t-wHb" kind="show" identifier="prefSegue" id="0Jb-0w-b6R"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="map" id="Waw-Ji-OFo">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="map" id="Waw-Ji-OFo">
                             <connections>
-                                <segue destination="Cqz-FS-C61" kind="show" id="zXM-Qm-x31"/>
+                                <segue destination="Cqz-FS-C61" kind="show" identifier="mapSegue" id="zXM-Qm-x31"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

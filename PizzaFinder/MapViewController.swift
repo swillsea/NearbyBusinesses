@@ -12,6 +12,7 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    var bizArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

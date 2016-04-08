@@ -21,6 +21,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var searchDistance = Double()
     var bizArray = []
     var searchText = String()
+    var distanceSlider = UISlider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.directionsButton.layer.cornerRadius = 5
         self.directionsButton.layer.masksToBounds = true
+        
+        self.distanceSlider.value = 0.01
 
         
         locationManager.requestWhenInUseAuthorization()
@@ -52,6 +55,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.searchBar.resignFirstResponder()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.searchDistance = Double(distanceSlider.value)
+        self.findNearbyBiznizes(location)
+    }
+    
 //    @IBAction func onDistanceSliderUpdated(sender: AnyObject) {
 //        self.searchDistance = Double(distanceSlider.value)
 //        self.findNearbyBiznizes(location)
@@ -66,8 +74,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler { (response, error) in
             self.bizArray = (response?.mapItems)!
-            let mapItem = response?.mapItems.first
-            self.getDirectionsToBizniz(mapItem!)
             self.tableView.reloadData()
         }
         
@@ -75,18 +81,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func getDirectionsToBizniz (mapItem: MKMapItem) {
         
-        let request = MKDirectionsRequest()
-        request.source = MKMapItem.mapItemForCurrentLocation()
-        request.destination = mapItem
-        let direction = MKDirections(request: request)
-        
-        direction.calculateDirectionsWithCompletionHandler { (response, error) in
-            let route = response?.routes.first
-            
-            for step in route!.steps {
-                self.textView.text = self.textView.text + "\(step.instructions)\n"
-            }
-        }
+//        let request = MKDirectionsRequest()
+//        request.source = MKMapItem.mapItemForCurrentLocation()
+//        request.destination = mapItem
+//        let direction = MKDirections(request: request)
+//        
+//        direction.calculateDirectionsWithCompletionHandler { (response, error) in
+//            let route = response?.routes.first
+//            
+//            for step in route!.steps {
+//                self.textView.text = self.textView.text + "\(step.instructions)\n"
+//            }
+//        }
         
     }
     
@@ -119,5 +125,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func onDirectionsButtonPressed(sender: UIButton) {
     
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "mapSegue" {
+            let destVC = segue.destinationViewController as! MapViewController
+            destVC.bizArray = self.bizArray
+        } else if segue.identifier == "prefSegue" {
+            let destVC = segue.destinationViewController as! SettingsViewController
+            destVC.distanceSlider = distanceSlider
+        }
     }
 }
